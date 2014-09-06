@@ -24,10 +24,10 @@
 
 <div id="social" class="alignright">
 	<a href="http://facebook.com/philtrecom">
-		<img src="media/facebook.gif" width="32" height="32" border="0" />
+		<img src="media/icons/facebook.gif" width="32" height="32" border="0" />
 	</a>
 	<a href="http://soundcloud.com/philtre">
-		<img src="media/soundcloud.gif" width="32" height="32" border="0" />
+		<img src="media/icons/soundcloud.gif" width="32" height="32" border="0" />
 	</a>
 </div>
 
