@@ -88,17 +88,20 @@
 <script type="text/javascript" src="https://w.soundcloud.com/player/api.js"></script>
 <script type="text/javascript">
 
+var player = document.querySelector('#player');
+
 var iframe = document.querySelector('.iframe');
 iframe.src = location.protocol + "//w.soundcloud.com/player/?url=" + "https://soundcloud.com/philtre/tractor-beam";
 var widget = SC.Widget(iframe);
 
+var lastHidden = player;
 var main_sample = document.querySelector('#main-sample');
-positionPlayerUnder(main_sample);
+positionPlayerOver(main_sample);
 
 function loadSoundUrl(url,element)
 {
-	positionPlayerUnder(element);
-	
+	positionPlayerOver(element);
+
 	var widgetOptions = {
 		"liking":"true",
 		"sharing":"true",
@@ -109,7 +112,7 @@ function loadSoundUrl(url,element)
 	// widget.load(url, widgetOptions);
 }
 
-function positionPlayerUnder(element)
+function positionPlayerOver(element)
 {
 	var rect = element.getBoundingClientRect()
 	var scrollTop = document.documentElement.scrollTop? document.documentElement.scrollTop:document.body.scrollTop;
@@ -117,11 +120,12 @@ function positionPlayerUnder(element)
 	var elementTop = rect.top+scrollTop;
 	var elementLeft = rect.left+scrollLeft;
 
-	//console.log(elementTop, elementLeft);
-
-	var player = document.querySelector('#player');
 	player.style.left = elementLeft;
-	player.style.top = elementTop+32;
+	player.style.top = elementTop+8;
+
+	element.style.visibility = "hidden";
+	lastHidden.style.visibility = "visible";
+	lastHidden = element;
 }
 
 </script>
