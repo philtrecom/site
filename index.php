@@ -31,6 +31,31 @@
 	</a>
 </div>
 
+<div id="new-release">
+	<div class="cover_image"><img src="media/cover.jpg" width="480" height="480"></div>
+</div>
+
+<?php
+	$row = array("ph0xx","2007","10-Speed Guillotine","Laptop Apetizers");
+?>
+
+<div id="new-release-info">
+	<div class="release_info">
+		<div>
+			<span class="alignleft"><?= $row[3] ?></span>
+			<span class="alignright"><?= strtoupper($row[0]).' '.$row[1] ?></span>
+		</div>
+
+		<div id="artist"><?= $row[2] ?></div>
+
+		<div><a href="media/<?= $row[0] ?>/hifi.zip">→DOWNLOAD</a></div>
+		<div id="main-sample" onClick="loadSoundUrl('http://soundcloud.com/aaimon/astral-goth-aimon-remix',this);" style="cursor: pointer;">→SAMPLE</div>				
+	</div>
+</div>
+
+<div id="player">
+	<iframe class="iframe" width="240" height="20" scrolling="no" frameborder="no"></iframe>
+</div>
 
 <?php $csv = array_map('str_getcsv', file('releases.csv')); arsort($csv); ?>
 
@@ -52,12 +77,54 @@
 				<div id="artist"><?= $row[2] ?></div>
 
 				<div><a href="media/<?= $row[0] ?>/hifi.zip">→DOWNLOAD</a></div>
+				<div onClick="loadSoundUrl('http://soundcloud.com/aaimon/astral-goth-aimon-remix',this);" style="cursor: pointer;">→SAMPLE</div>				
 			</div>
 		</div>
 
 	<?php endforeach; ?>
 
 </div>
+
+<script type="text/javascript" src="https://w.soundcloud.com/player/api.js"></script>
+<script type="text/javascript">
+
+var iframe = document.querySelector('.iframe');
+iframe.src = location.protocol + "//w.soundcloud.com/player/?url=" + "https://soundcloud.com/philtre/tractor-beam";
+var widget = SC.Widget(iframe);
+
+var main_sample = document.querySelector('#main-sample');
+positionPlayerUnder(main_sample);
+
+function loadSoundUrl(url,element)
+{
+	positionPlayerUnder(element);
+	
+	var widgetOptions = {
+		"liking":"true",
+		"sharing":"true",
+		"download":"true",
+		"auto_play":"true"
+	};
+
+	// widget.load(url, widgetOptions);
+}
+
+function positionPlayerUnder(element)
+{
+	var rect = element.getBoundingClientRect()
+	var scrollTop = document.documentElement.scrollTop? document.documentElement.scrollTop:document.body.scrollTop;
+	var scrollLeft = document.documentElement.scrollLeft? document.documentElement.scrollLeft:document.body.scrollLeft;
+	var elementTop = rect.top+scrollTop;
+	var elementLeft = rect.left+scrollLeft;
+
+	//console.log(elementTop, elementLeft);
+
+	var player = document.querySelector('#player');
+	player.style.left = elementLeft;
+	player.style.top = elementTop+32;
+}
+
+</script>
 
 </body>
 </html>
