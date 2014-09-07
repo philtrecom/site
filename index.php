@@ -66,7 +66,7 @@
 		<?php if( strlen($row[0]) < 1 ) continue; ?>
 
 		<div class="release">
-			<div class="cover_image"><img src="media/<?= $row[0] ?>/cover.jpg" width="240" height="240"></div>
+			<div class="cover_image"><img src="media/releases/<?= $row[0] ?>/cover.jpg" width="240" height="240"></div>
 
 			<div class="release_info">
 				<div>
@@ -76,7 +76,7 @@
 
 				<div id="artist"><?= $row[2] ?></div>
 
-				<div><a href="media/<?= $row[0] ?>/hifi.zip">→DOWNLOAD</a></div>
+				<div><a href="media/releases/<?= $row[0] ?>/hifi.zip">→DOWNLOAD</a></div>
 				<div onClick="loadSoundUrl('http://soundcloud.com/aaimon/astral-goth-aimon-remix',this);" style="cursor: pointer;">→SAMPLE</div>				
 			</div>
 		</div>
