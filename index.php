@@ -31,12 +31,14 @@
 	</a>
 </div>
 
+<!-- ---------------------------------------------------------------------------------------------------- new release -->
+
 <div id="new-release">
-	<div class="cover_image"><img src="media/cover.jpg" width="480" height="480"></div>
+	<div class="cover_image"><img src="media/feature_cover.jpg" width="480" height="480"></div>
 </div>
 
 <?php
-	$row = array("ph0xx","2007","10-Speed Guillotine","Laptop Apetizers");
+	$row = array("ph025","2015","BITWVLF","MMXV","");
 ?>
 
 <div id="new-release-info">
@@ -48,8 +50,8 @@
 
 		<div id="artist"><?= $row[2] ?></div>
 
-		<div><a href="media/<?= $row[0] ?>/hifi.zip">→DOWNLOAD</a></div>
-		<div id="main-sample" onClick="loadSoundUrl('http://soundcloud.com/aaimon/astral-goth-aimon-remix',this);" style="cursor: pointer;">→SAMPLE</div>				
+		<div><a href="https://bitwvlf.bandcamp.com" target="_blank">→DOWNLOAD</a></div>
+		<div id="main-sample" onClick="loadSoundUrl('https://soundcloud.com/scowitchboy/bitwvlf-bound-blade-remix',this);" style="cursor: pointer;">→SAMPLE</div>				
 	</div>
 </div>
 
@@ -58,6 +60,8 @@
 </div>
 
 <?php $csv = array_map('str_getcsv', file('releases.csv')); arsort($csv); ?>
+
+<!-- ---------------------------------------------------------------------------------------------------- releases -->
 
 <div id="releases">
 
@@ -76,8 +80,29 @@
 
 				<div id="artist"><?= $row[2] ?></div>
 
-				<div><a href="media/releases/<?= $row[0] ?>/hifi.zip">→DOWNLOAD</a></div>
-				<div onClick="loadSoundUrl('http://soundcloud.com/aaimon/astral-goth-aimon-remix',this);" style="cursor: pointer;">→SAMPLE</div>				
+				<?php
+					if( isset($row[5]) )
+					{
+						$download = $row[5];
+						$target = "_blank";
+					}
+					else
+
+					{
+						$download = "media/releases/{$row[0]}/hifi.zip";
+						$target = "_self";
+					}
+
+				?>
+
+				<div><a href="<?= $download ?>" target="<?= $target ?>">→DOWNLOAD</a></div>
+
+				<?php
+					$url = $row[4];
+					if( strpos($url, "http") !== 0 ) $url = 'http://soundcloud.com/philtre/' . $url;
+				?>
+
+				<div onClick="loadSoundUrl('<?= $url ?>',this);" style="cursor: pointer;">→SAMPLE</div>				
 			</div>
 		</div>
 
@@ -85,13 +110,15 @@
 
 </div>
 
+<!-- ---------------------------------------------------------------------------------------------------- end releases -->
+
 <script type="text/javascript" src="https://w.soundcloud.com/player/api.js"></script>
 <script type="text/javascript">
 
 var player = document.querySelector('#player');
 
 var iframe = document.querySelector('.iframe');
-iframe.src = location.protocol + "//w.soundcloud.com/player/?url=" + "https://soundcloud.com/philtre/tractor-beam";
+iframe.src = location.protocol + "//w.soundcloud.com/player/?url=" + "https://soundcloud.com/scowitchboy/bitwvlf-bound-blade-remix";
 var widget = SC.Widget(iframe);
 
 var lastHidden = player;
@@ -109,7 +136,7 @@ function loadSoundUrl(url,element)
 		"auto_play":"true"
 	};
 
-	// widget.load(url, widgetOptions);
+	widget.load(url, widgetOptions);
 }
 
 function positionPlayerOver(element)
